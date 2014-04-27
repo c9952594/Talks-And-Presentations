@@ -1,0 +1,6 @@
+﻿Filter: <input type="text" ng-model="filter_text" />
+{{ filter_text }}
+
+---------------
+
+ng-app

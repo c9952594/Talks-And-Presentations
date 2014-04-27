@@ -1,0 +1,26 @@
+﻿.animate-hide {
+  -webkit-transition:all linear 0.25s;
+  transition:all linear 0.25s;
+  
+  opacity:1;
+}
+ 
+.animate-hide.ng-hide-add,
+.animate-hide.ng-hide-remove {
+  display:block!important;
+}
+ 
+.animate-hide.ng-hide {
+  opacity:0;
+}
+
+---------------
+
+<div ng-view class="animate-hide"></div>
+
+---------------
+
+<script src="../Scripts/angular-animate.js"></script>
+
+---------------
+

@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>SPA demo</title>
+    <link href="../Content/bootstrap.css" rel="stylesheet" />
+    <link href="../Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="StyleSheet.css" rel="stylesheet" />
+</head>
+<body ng-app="demo">
+    <div ng-view></div>
+
+    <script src="../Scripts/jquery-1.9.0.js"></script>
+    <script src="../Scripts/bootstrap.js"></script>
+    <script src="../Scripts/angular.js"></script>
+    <script src="../Scripts/angular-route.js"></script>
+    <script>
+        angular.module('demo', ['ngRoute']);
+
+        angular.module('demo').config(function ($routeProvider) {
+            $routeProvider
+                .when('/tasks', {
+                    controller: 'TasksController',
+                    templateUrl: 'tasks.html'
+                })
+                .when('/tasks/:task_id', {
+                    controller: 'TaskController',
+                    templateUrl: 'task.html'
+                })
+                .otherwise({
+                    redirectTo: '/tasks'
+                });
+        });
+
+        angular.module('demo').directive('focusOnCreate', function () {
+            return {
+                link: function (scope, element, attrs) {
+                    element[0].focus();
+                }
+            }
+        });
+
+        angular.module('demo').controller('TasksController', function ($scope, taskFactory) {
+            taskFactory.getAllTasks().success(function (tasks) {
+                $scope.tasks = tasks;
+            });
+        });
+
+        angular.module('demo').controller('TaskController', function ($scope, taskFactory, $routeParams, $location) {
+            var edit_task = !isNaN($routeParams.task_id * 1)
+            if (edit_task) {
+                taskFactory.getTask($routeParams.task_id).success(function (task) {
+                    $scope.task = task;
+                });
+                $scope.editing = true;
+            } else {
+                $scope.task = {};
+                $scope.editing = false;
+            }
+            
+            $scope.save = function (task) {
+                taskFactory.save(task).success(back_to_tasks);
+            }
+
+            $scope.remove = function (task) {
+                taskFactory.delete(task).success(back_to_tasks);
+            }
+
+            function back_to_tasks() {
+                $location.path('/tasks');
+            }
+        });
+
+        angular.module('demo').factory('taskFactory', function ($http) {
+            var base_url = '/api/tasks';
+
+            var factory = {}
+
+            // 5 operations like WebAPI
+
+            factory.getAllTasks = function () {
+                return $http.get(base_url);
+            }
+
+            factory.getTask = function (task_id) {
+                return $http.get(base_url + '/' + task_id);
+            }
+
+            factory.save = function (task) {
+                var task_needs_updating = task.Id;
+                if (task_needs_updating) {
+                    return $http.put(base_url + '/' + task.Id, task);
+                } else {
+                    return $http.post(base_url, task);
+                }
+            }
+
+            factory.delete = function (task) {
+                return $http.delete(base_url + '/' + task.Id, task);
+            }
+
+            return factory;
+        });
+
+    </script>
+</body>
+</html>

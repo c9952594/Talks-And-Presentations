@@ -1,0 +1,43 @@
+﻿angular.module('demo', []);
+
+angular.module('demo').controller('TasksController', function ($scope) {
+	// Same as the repo
+    $scope.tasks = [
+        {
+            Text: "Static Item1", Tag: "home",
+            TimeSpent: 30, TimeToComplete: 120,
+            Completed: false
+        },
+        {
+            Text: "Static Item2", Tag: "work",
+            TimeSpent: 50, TimeToComplete: 60,
+            Completed: true
+        },
+        {
+            Text: "Static Item3", Tag: "work",
+            TimeSpent: 60, TimeToComplete: 150,
+            Completed: false
+        }
+    ];
+});
+
+---------------
+
+<div ng-repeat="task in tasks">
+
+---------------
+
+<body ng-app="demo" ng-controller="TasksController">
+
+---------------
+
+<a class="list-group-item">
+    <span>{{ task.Text }}</span>
+                
+    <div>
+        <div class="small text-left">Spent: {{ task.TimeSpent }}</div>
+        <div class="small text-left">Estimate: {{ task.TimeToComplete }}</div>
+    </div>
+
+    <div class="small text-right">{{ task.Tag }}</div>
+</a>

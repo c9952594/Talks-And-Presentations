@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>SPA demo</title>
+    <link href="../Content/bootstrap.css" rel="stylesheet" />
+    <link href="../Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="StyleSheet.css" rel="stylesheet" />
+</head>
+<body ng-app>
+    <div class="container">
+        <!-- BEGIN: The filter -->
+        <div class="page-header">
+            Filter: <input type="text" ng-model="filter_text" />
+            {{ filter_text }}
+        </div>
+        <!-- END: The filter -->
+
+        <!-- The list template -->
+        <div class="list-group">
+            <div>
+                <!-- BEGIN: The task template -->
+                <a class="list-group-item">
+                    <span>(Task 1)</span>
+                
+                    <div>
+                        <div class="small text-left">Spent: (Time Spent)</div>
+                        <div class="small text-left">Estimate: (Time To Complete)</div>
+                    </div>
+
+                    <div class="small text-right">(Tags)</div>
+                </a>
+                <!-- END: The task template -->
+
+                <a class="list-group-item">
+                    <span>(Task 2)</span>
+                
+                    <div>
+                        <div class="small text-left">Spent: (Time Spent)</div>
+                        <div class="small text-left">Estimate: (Time To Complete)</div>
+                    </div>
+
+                    <div class="small text-right">(Tags)</div>
+                </a>
+
+                <a class="list-group-item">
+                    <span>(Task 3)</span>
+                
+                    <div>
+                        <div class="small text-left">Spent: (Time Spent)</div>
+                        <div class="small text-left">Estimate: (Time To Complete)</div>
+                    </div>
+
+                    <div class="small text-right">(Tags)</div>
+                </a>
+            </div>
+
+            <!-- Add new link -->
+            <a class="list-group-item text-right">Add New</a>
+        </div>
+    </div>
+
+    <script src="../Scripts/jquery-1.9.0.js"></script>
+    <script src="../Scripts/bootstrap.js"></script>
+    <script src="../Scripts/angular.js"></script>
+    <script src="../Scripts/angular-route.js"></script>
+    <script>
+        
+    </script>
+</body>
+</html>

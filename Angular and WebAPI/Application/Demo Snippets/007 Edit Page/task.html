@@ -1,0 +1,50 @@
+﻿<div class="container">
+
+    <h3 class="page-header">{{ task.Text }}</h3>
+    
+    <form class="form-horizontal">
+        <div class="control-group clearfix">
+            <label for="input1" class="control-label col-sm-2">Task</label>
+            <div class="controls col-sm-10">
+                <input type="text" ng-model="task.Text">
+            </div>
+        </div>
+
+        <div class="control-group clearfix">
+            <label for="input1" class="control-label col-sm-2">Time Spent</label>
+            <div class="controls col-sm-10">
+                <input type="number" ng-model="task.TimeSpent">
+            </div>
+        </div>
+
+        <div class="control-group clearfix">
+            <label for="input1" class="control-label col-sm-2">Time To Complete</label>
+            <div class="controls col-sm-10">
+                <input type="number" ng-model="task.TimeToComplete">
+            </div>
+        </div>
+
+        <div class="control-group clearfix">
+            <label for="input1" class="control-label col-sm-2">Tag</label>
+            <div class="controls col-sm-10">
+                <input type="text" ng-model="task.Tag">
+            </div>
+        </div>
+
+        <div class="control-group clearfix">
+            <label for="input1" class="control-label col-sm-2">Completed</label>
+            <label class="controls col-sm-10">
+                <input type="checkbox" class="checkbox" ng-model="task.Completed" />
+            </label>
+        </div>
+
+        <div class="control-group clearfix">
+            <label for="input1" class="control-label col-sm-2"></label>
+            <label class="controls col-sm-10">
+                <button class="btn" ng-click="save(task)">Save</button>
+                <button class="btn" ng-click="remove(task)">Remove</button>
+            </label>
+        </div>
+
+    </form>
+</div>

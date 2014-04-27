@@ -1,0 +1,18 @@
+﻿var add_task = isNaN($routeParams.task_id)
+if (add_task) {
+    $scope.task = {};
+    $scope.editing = false;
+} else {
+    taskFactory.getTask($routeParams.task_id).success(function (task) {
+        $scope.task = task;
+    });
+    $scope.editing = true;
+}
+
+---------------
+
+<button class="btn" ng-show="editing" ng-click="remove(task)">Remove</button>
+
+---------------
+
+<a class="list-group-item text-right" href="#/tasks/new">Add New</a>

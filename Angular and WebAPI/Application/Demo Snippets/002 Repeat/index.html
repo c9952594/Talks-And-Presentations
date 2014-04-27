@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>SPA demo</title>
+    <link href="../Content/bootstrap.css" rel="stylesheet" />
+    <link href="../Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="StyleSheet.css" rel="stylesheet" />
+</head>
+<body ng-app>
+    <div class="container">
+        <div class="page-header">
+            Filter: <input type="text" ng-model="filter_text" />
+        </div>
+
+        <!-- The list template -->
+        <div class="list-group">
+            <div ng-repeat="task in ['one', 'two', 'three']">
+                <a class="list-group-item">
+                    <span>{{task}}</span>
+                
+                    <div>
+                        <div class="small text-left">Spent: (Time Spent)</div>
+                        <div class="small text-left">Estimate: (Time To Complete)</div>
+                    </div>
+
+                    <div class="small text-right">(Tags)</div>
+                </a>
+            </div>
+
+            <!-- Add new link -->
+            <a class="list-group-item text-right">Add New</a>
+        </div>
+    </div>
+
+    <script src="../Scripts/jquery-1.9.0.js"></script>
+    <script src="../Scripts/bootstrap.js"></script>
+    <script src="../Scripts/angular.js"></script>
+    <script src="../Scripts/angular-route.js"></script>
+    <script>
+        /*
+        angular.module('demo', []);
+
+        angular.module('demo').controller('TasksController', function ($scope) {
+            $scope.task = {
+                Text: "Item1", Tag: "home",
+                TimeSpent: 30, TimeToComplete: 120,
+                Completed: false
+            }
+        });
+        */
+    </script>
+</body>
+</html>

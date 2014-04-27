@@ -1,0 +1,44 @@
+﻿angular.module('demo').factory('taskFactory', function ($http) {
+    var base_url = '/api/tasks';
+
+    var factory = {}
+
+    // 5 operations like WebAPI
+
+    factory.getAllTasks = function () {
+        return $http.get(base_url);
+    }
+
+    factory.getTask = function (task_id) {
+        return $http.get(base_url + '/' + task_id);
+    }
+
+    factory.save = function (task) {
+        var task_needs_updating = task.Id;
+        if (task_needs_updating) {
+            return $http.put(base_url + '/' + task.Id, task);
+        } else {
+            return $http.post(base_url, task);
+        }
+    }
+
+    factory.delete = function (task) {
+        return $http.delete(base_url + '/' + task.Id, task);
+    }
+
+    return factory;
+});
+
+---------------
+
+angular.module('demo').controller('TasksController', function ($scope, taskFactory) {
+    $scope.tasks = taskFactory.getAllTasks()
+});
+
+---------------
+
+angular.module('demo').controller('TasksController', function ($scope, taskFactory) {
+    taskFactory.getAllTasks().success(function (tasks) {
+        $scope.tasks = tasks;
+    });
+});

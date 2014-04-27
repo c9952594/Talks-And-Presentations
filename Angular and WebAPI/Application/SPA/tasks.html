@@ -1,0 +1,31 @@
+﻿<div class="container">
+    <div class="page-header">
+        Filter: <input type="text" ng-model="filter_text" />
+        Order By: 
+        <select ng-init="predicate='Text'" ng-model="predicate">
+            <option value="Text" selected>Text</option>
+            <option value="TimeSpent">Time Spent</option>
+            <option value="TimeToComplete">Estimate</option>
+            <option value="Completed">Completed</option>
+        </select>
+    </div>
+
+    <!-- The list template -->
+    <div class="list-group">
+        <div ng-repeat="task in tasks | filter:filter_text | orderBy:predicate">
+            <a class="list-group-item" href="#/tasks/{{ task.Id }}">
+                <span ng-class="{ strikethrough: task.Completed }">{{ task.Text }}</span>
+                
+                <div ng-hide="task.Completed">
+                    <div class="small text-left">Spent: {{ task.TimeSpent }}</div>
+                    <div class="small text-left">Estimate: {{ task.TimeToComplete }}</div>
+                </div>
+
+                <div class="small text-right">{{ task.Tag }}</div>
+            </a>
+        </div>
+
+        <!-- Add new link -->
+        <a class="list-group-item text-right" href="#/tasks/new">Add New</a>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>SPA demo</title>
+    <link href="../Content/bootstrap.css" rel="stylesheet" />
+    <link href="../Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="StyleSheet.css" rel="stylesheet" />
+</head>
+<body ng-app="demo" ng-controller="TasksController">
+    <div class="container">
+        <div class="page-header">
+            Filter: <input type="text" ng-model="filter_text" />
+        </div>
+
+        <!-- The list template -->
+        <div class="list-group">
+            <div ng-repeat="task in tasks | filter:filter_text">
+                <a class="list-group-item">
+                    <span ng-class="{ strikethrough: task.Completed }">{{ task.Text }}</span>
+                
+                    <div ng-hide="task.Completed">
+                        <div class="small text-left">Spent: {{ task.TimeSpent }}</div>
+                        <div class="small text-left">Estimate: {{ task.TimeToComplete }}</div>
+                    </div>
+
+                    <div class="small text-right">{{ task.Tag }}</div>
+                </a>
+            </div>
+
+            <!-- Add new link -->
+            <a class="list-group-item text-right">Add New</a>
+        </div>
+    </div>
+
+    <script src="../Scripts/jquery-1.9.0.js"></script>
+    <script src="../Scripts/bootstrap.js"></script>
+    <script src="../Scripts/angular.js"></script>
+    <script src="../Scripts/angular-route.js"></script>
+    <script>
+        angular.module('demo', []);
+
+        angular.module('demo').controller('TasksController', function ($scope, taskFactory) {
+            taskFactory.getAllTasks().success(function (tasks) {
+                $scope.tasks = tasks;
+            });
+        });
+
+        angular.module('demo').factory('taskFactory', function ($http) {
+            var baseUrl = '/api/tasks';
+
+            var factory = {}
+
+            // 5 operations like WebAPI
+
+            factory.getAllTasks = function () {
+                return $http.get(baseUrl);
+            }
+
+            factory.getTask = function (task_id) {
+                return $http.get(base_url + '/' + task_id);
+            }
+
+            factory.save = function (task) {
+                var task_needs_updating = task.Id;
+                if (task_needs_updating) {
+                    return $http.put(base_url + '/' + task.Id, task);
+                } else {
+                    return $http.post(base_url, task);
+                }
+            }
+
+            factory.delete = function (task) {
+                return $http.delete(base_url + '/' + task.Id, task);
+            }
+
+            return factory;
+        });
+
+    </script>
+</body>
+</html>

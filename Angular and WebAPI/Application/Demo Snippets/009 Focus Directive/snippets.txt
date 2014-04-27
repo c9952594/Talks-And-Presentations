@@ -1,0 +1,11 @@
+﻿angular.module('demo').directive('focusOnCreate', function () {
+    return {
+        link: function (scope, element, attrs) {
+            element[0].focus();
+        }
+    }
+});
+
+---------------
+
+<input type="text" ng-model="task.Text" focus-on-create>

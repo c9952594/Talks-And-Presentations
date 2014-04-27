@@ -1,0 +1,13 @@
+﻿<span ng-class="{ strikethrough: task.Completed }">{{ task.Text }}</span>
+
+---------------
+
+<div ng-hide="task.Completed">
+    <div class="small text-left">Spent: {{ task.TimeSpent }}</div>
+    <div class="small text-left">Estimate: {{ task.TimeToComplete }}</div>
+</div>
+
+---------------
+
+| filter:filter_text
+| uppercase
